@@ -250,7 +250,7 @@ def create_dataset(
             partial(general_output_processor, field="summary"),
         )
     else:
-        raise ValueError(f"Unsupported dataset: {dataset}")
+        assert 0, dataset
 
     # Load dataset
     if dataset == "wikihow":

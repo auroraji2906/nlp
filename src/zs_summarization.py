@@ -18,7 +18,7 @@ from bedrock_utils import predict_one_eg_mistral, predict_one_eg_claude_instant,
 from prompts import (
     ZS_NAIVE_PROMPT_STR_FOR_MISTRAL,
     ZS_NAIVE_PROMPT_STR_FOR_CLAUDE,
-    ZS_NAIVE_PROMPT_STR_FOR_LLAMA
+    ZS_NAIVE_PROMPT_STR_FOR_LLAMA,
     ZS_KEYWORD_PROMPT_STR_FOR_MISTRAL,
     ZS_KEYWORD_PROMPT_STR_FOR_CLAUDE,
     ZS_KEYWORD_PROMPT_STR_FOR_LLAMA,
@@ -203,12 +203,9 @@ def run_inference(model_name, kw_strategy, kw_model_top_k, dataset, dataset_dir,
     with jsonlines.open(dataset_filename) as f:
         inference_data = list(f)
 
-    if model_name == "llama":
-        all_res = [predict_one_eg_fn(item) for item in tqdm.tqdm(inference_data, total=len(inference_data))]
-    else:
-        with Pool(4) as p:
-            all_res = list(tqdm.tqdm(p.imap(predict_one_eg_fn, inference_data), total=len(inference_data)))
-
+    # 1) build prompts FIRST
+    with Pool(4) as p:
+        all_prompt = list(tqdm.tqdm(p.imap(prompting_fn, inference_data), total=len(inference_data)))
 
     for i in range(len(inference_data)):
         if isinstance(all_prompt[i], str):
@@ -217,9 +214,16 @@ def run_inference(model_name, kw_strategy, kw_model_top_k, dataset, dataset_dir,
             inference_data[i]["prompt_input"] = all_prompt[i][0]
             inference_data[i]["other_info"] = all_prompt[i][1]
 
-    with Pool(4) as p:
-        all_res = list(tqdm.tqdm(p.imap(predict_one_eg_fn, inference_data), total=len(inference_data)))
+    # 2) run inference AFTER prompt_input exists
+    if model_name == "llama":
+        # NO Pool on GPU (altrimenti multipli processi provano a usare la GPU / caricare il modello)
+        all_res = [predict_one_eg_fn(item) for item in tqdm.tqdm(inference_data, total=len(inference_data))]
+    else:
+        with Pool(4) as p:
+            all_res = list(tqdm.tqdm(p.imap(predict_one_eg_fn, inference_data), total=len(inference_data)))
+
     all_res = [item for item in all_res]
+
 
     output_path = str(pathlib.Path(output_dir).expanduser())
     os.makedirs(output_path, exist_ok=True)
