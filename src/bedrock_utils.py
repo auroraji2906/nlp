@@ -206,13 +206,6 @@ def predict_one_eg_llama_light(x):
             gen_ids = output_ids[0][inputs["input_ids"].shape[1]:]
             text = _llama_tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
 
-            # ---- (3) pulizia leggera (senza cambiare prompt.py) ----
-            # rimuove prefissi tipici che "sporcano" (optional ma utile)
-            for p in ["Summary:", "TL;DR:", "Here is the summary:", "Here’s the summary:"]:
-                if text.lower().startswith(p.lower()):
-                    text = text[len(p):].strip()
-                    break
-
             # crea “response_body” stile Bedrock/Mistral
             response_body = {"outputs": [{"text": text}]}
             success = True
