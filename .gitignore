@@ -1,0 +1,8 @@
+
+# Colab / Python
+__pycache__/
+*.pyc
+
+# Experiments & logs
+experiments/
+lightning_logs/
