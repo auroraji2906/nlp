@@ -1,0 +1,1 @@
+{"dataset": "cnn", "tokenizer": "allenai/longformer-large-4096", "max_input_len": 6000, "max_output_len": 510, "output_dir": "experiments/cnn_dataset/", "seed": 42, "sample_train": 1000, "sample_val": 200, "sample_test": 500}
