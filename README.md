@@ -198,7 +198,7 @@ python src/zs_summarization.py \
   --output_dir experiments/runs/sigext_llama_en \
   --model_name llama \
   --kw_strategy sigext_topk \
-  --kw_model_top_k 20 \
+  --kw_model_top_k 15 \
   --target_lang en
 ```
 
@@ -219,7 +219,7 @@ python src/zs_summarization.py \
   --output_dir experiments/runs/graphsigext_llama_en \
   --model_name llama \
   --kw_strategy graph_sigext \
-  --kw_model_top_k 20 \
+  --kw_model_top_k 15 \
   --graph_sent_budget 10 \
   --graph_window 2 \
   --graph_match_threshold 70 \
