@@ -1,0 +1,18 @@
+{
+  "rouge1p": 31.323,
+  "rouge1r": 59.558,
+  "rouge1f": 39.8443,
+  "rouge2p": 12.5948,
+  "rouge2r": 23.9329,
+  "rouge2f": 16.0163,
+  "rougeLp": 19.5383,
+  "rougeLr": 37.4372,
+  "rougeLf": 24.9286,
+  "rougeLsump": 27.8444,
+  "rougeLsumr": 52.794,
+  "rougeLsumf": 35.3796,
+  "bert_score_p": 86.5864,
+  "bert_score_r": 88.3809,
+  "bert_score_f": 87.4629,
+  "gen_len": 103.822
+}
