@@ -1,0 +1,19 @@
+{
+  "rouge1p": 29.1429,
+  "rouge1r": 42.8815,
+  "rouge1f": 32.6852,
+  "rouge2p": 8.309,
+  "rouge2r": 12.7657,
+  "rouge2f": 9.4394,
+  "rougeLp": 21.9396,
+  "rougeLr": 32.7423,
+  "rougeLf": 24.7225,
+  "rougeLsump": 24.1,
+  "rougeLsumr": 35.336,
+  "rougeLsumf": 26.96,
+  "gen_len": 31.508,
+  "bertscore_p": 88.6758,
+  "bertscore_r": 90.5674,
+  "bertscore_f1": 89.5963,
+  "bertscore_model": "roberta-large"
+}

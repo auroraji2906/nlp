@@ -1,0 +1,8 @@
+{
+  "gen_len": 102.83,
+  "target_lang": "Italian",
+  "bertscore_p": 84.4523,
+  "bertscore_r": 86.3233,
+  "bertscore_f1": 85.3674,
+  "bertscore_model": "xlm-roberta-large"
+}
